@@ -717,7 +717,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.searchTermStream$
       .pipe(
-+        debounceTime(1000),
+        debounceTime(1000),
 +       distinctUntilChanged()
       )
       .subscribe(term => this.messages.push(`http call for: ${term}`));
