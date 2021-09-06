@@ -91,6 +91,7 @@ To test run the requests in the files inside the `test` directory using a tool l
   - Leave the `Bearer` before supplying the token (XXXXX)
     `Authorization: Bearer XXXXXX`
     These are the same requests a client like an `Angular` application makes.
+  - See decoded token using [jwt.io](https://jwt.io/)
 
 ### Resources
 
@@ -335,3 +336,15 @@ export class SigninComponent implements OnInit {
   }
 }
 ```
+
+# @auth0/angular-jwt
+
+This library provides an HttpInterceptor which automatically attaches a JSON Web Token to HttpClient requests.
+
+- [@auth0/angular-jwt](https://www.npmjs.com/package/@auth0/angular-jwt)
+
+  ```
+  npm i @auth0/angular-jwt
+  ```
+
+- [Source Code for the angular-jwt interceptor](https://github.com/auth0/angular2-jwt/blob/main/projects/angular-jwt/src/lib/jwt.interceptor.ts)
