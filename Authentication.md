@@ -355,11 +355,13 @@ Single sign-on (SSO) is an authentication scheme that allows a user to log in wi
 
 ## Microsoft Identity (Azure)
 
-### Authorization Code Flow (preferred)
+### Examples
 
-As you read through the documentation focus on the `Authorization Code Flow`. This flow requires a pop-up window but does not require the Angular application to be hosted in a .NET Web App.
+- [Quickstart Angular SPA with Microsoft Identity Authentication](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v2-javascript-auth-code-angular)
+- [Tutorial Angular SPA with Microsoft Identity Authentication](https://docs.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-angular-auth-code)
 
-The `implicit grant flow` is no longer recommended as it requires third-party cookies (cookies from a different domain) to work properly and these are not supported in several browsers and are being phased out in Google Chrome.
+  #### Authorization Code Flow (preferred)
 
-- [Quickstart Angular SPA](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v2-javascript-auth-code-angular)
-- [Tutorial Angular SPA](https://docs.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-angular-auth-code)
+  > As you read through the documentation and examples focus on the `Authorization Code Flow`. This flow requires a pop-up window but does not require the Angular application to be hosted in a .NET Web App.
+
+  > The `implicit grant flow` is no longer recommended as it requires third-party cookies (cookies from a different domain) to work properly and these are not supported in several browsers and are being phased out in Google Chrome.
