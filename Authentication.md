@@ -337,7 +337,7 @@ export class SigninComponent implements OnInit {
 }
 ```
 
-# @auth0/angular-jwt
+## @auth0/angular-jwt
 
 This library provides an HttpInterceptor which automatically attaches a JSON Web Token to HttpClient requests.
 
@@ -348,3 +348,18 @@ This library provides an HttpInterceptor which automatically attaches a JSON Web
   ```
 
 - [Source Code for the angular-jwt interceptor](https://github.com/auth0/angular2-jwt/blob/main/projects/angular-jwt/src/lib/jwt.interceptor.ts)
+
+# Single Sign-On (SSO)
+
+Single sign-on (SSO) is an authentication scheme that allows a user to log in with a single ID and password to any of several related, yet independent, software systems.
+
+## Microsoft Identity (Azure)
+
+### Authorization Code Flow (preferred)
+
+As you read through the documentation focus on the `Authorization Code Flow`. This flow requires a pop-up window but does not require the Angular application to be hosted in a .NET Web App.
+
+The `implicit grant flow` is no longer recommended as it requires third-party cookies (cookies from a different domain) to work properly and these are not supported in several browsers and are being phased out in Google Chrome.
+
+- [Quickstart Angular SPA](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v2-javascript-auth-code-angular)
+- [Tutorial Angular SPA](https://docs.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-angular-auth-code)
