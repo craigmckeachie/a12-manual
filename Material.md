@@ -13,17 +13,21 @@
 
    Choose:
 
+   - routing: Y
+   - CSS
+
+   - proceed (installing package)? y
    - indigo-pink.css
-   - HammerJS: Yes
+   - global typography styles: y
    - Browser animations: Y
 
-1. Open `my-mat-proj` in your editor.
+2. Open `my-mat-proj` in your editor.
 
    ```shell
    code .
    ```
 
-1. Look at the changes using a Git diff.
+3. Look at the changes using a Git diff.
 
 > What the command does:
 
@@ -36,11 +40,10 @@
         - Remove margins from body
         - Set height: 100% on html and body
         - Make Roboto the default font of your app
-        - Install and import hammerjs for gesture support in your project
 
 <div style="page-break-after: always;"></div>
 
-3. Add a slider.
+1. Add a slider.
 
    `src\app\app.module.ts`
 
@@ -61,10 +64,10 @@
    <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
    ```
 
-4. Build and run the application.
+2. Build and run the application.
 
    ```shell
-   ng serve
+   ng serve -o
    ```
 
 <div style="page-break-after: always;"></div>
@@ -91,7 +94,16 @@
 
    > Resize browser smaller to see hamburger menu
 
-3. Make the changes below to show the menu by default.
+3. Add the mainnav component to the app component.
+
+   #### `src\app\app.component.html`
+
+   ```diff
+   + <app-mainnav></app-mainnav>
+   - <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+   ```
+
+4. Make the changes below to show the menu by default.
 
    `src/app/mainnav/mainnav.component.html`
 
@@ -138,7 +150,8 @@
 
    ```diff
    ...
-   -    <h1>Test</h1>
+   -    <h1>Main Content</h1>
+   -  <p>This is the main content.</p>
    +    <app-dashboard></app-dashboard>
      </mat-sidenav-content>
    </mat-sidenav-container>
@@ -166,7 +179,7 @@
 
    ```
 
-<div style="page-break-after: always;"></div>
+
 
 ### Forms
 
