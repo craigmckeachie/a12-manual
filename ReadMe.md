@@ -9,13 +9,15 @@
 - Change Detection
   - Slides
   - Demo (code review)
-- Unit Testing Slides
+- Unit Testing
+  - Slides
   - Demo & Lab Together
-- NgRx
+- State Management (Redux, NgRx)
   - Slides
   - [Counter Demo](./NgRxCounter.md)
   - [Lab 32](./NgRxLabs.md)
 - Libraries
+  - Slides
   - [Demo/Lab](./Libraries.md) (workspaces and multiple projects)
   - [Sharing Components (Storybook)](https://storybook.js.org/docs/angular/get-started/introduction)
     - Storybook is a tool for UI development
@@ -27,8 +29,9 @@
   - [Demo](./Material.md) (together)
   <!-- - [CDK Demos](./CDK.md) -->
 - Lifecycle
+  - Slides
   - [Demo](./LifecycleHooks.md)
-- Integrate with .NET Core
+- Angular .NET Core
   - Code Review (sample application)
 
 <!-- - Internationalization (i18n)
