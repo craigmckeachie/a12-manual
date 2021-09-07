@@ -179,8 +179,6 @@
 
    ```
 
-
-
 ### Forms
 
 1. Generate an address form component.
@@ -202,6 +200,20 @@
    </mat-sidenav-container>
 
    ```
+
+### Exercise
+
+Add three routes to the application and route to each of the 3 components we generated. When you are finished the application menu should look something like the following:
+
+- Menu
+  - Dashboard
+  - Contact
+  - Table
+
+...and when you click on each menu item it should load the corresponding component.
+
+If needed, the finished code is available in this git repository.
+https://github.com/craigmckeachie/my-mat-proj
 
 #### Reference
 
