@@ -277,8 +277,9 @@ import { HelloWorldComponent } from './hello-world/hello-world.component';
   styles: [],
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  @ViewChild(HelloWorldComponent, { static: true }) helloWorldComponent;
-  @ViewChild(FruitListComponent, { static: false }) fruitListComponent;
+  @ViewChild(HelloWorldComponent, { static: true })
+  helloWorldComponent!: HelloWorldComponent;
+  @ViewChild(FruitListComponent, { static: false })
   data: string[] = ['Apple', 'Orange', 'Plum'];
   showList = true;
 
@@ -355,7 +356,7 @@ export class FruitListComponent implements OnInit, OnChanges, OnDestroy {
 
 **`src\hello-world\hello-world.component.ts`**
 
-```ts
+```diff
 import {
   Component,
   OnInit,
@@ -366,76 +367,35 @@ import {
 
 @Component({
   selector: 'app-hello-world',
-  template: ` <p>Hello World! My name is: <ng-content></ng-content></p> `,
+  template: ` <p>Hello World! My name is:
++  <ng-content></ng-content>
+  </p> `,
   styles: [],
 })
 export class HelloWorldComponent
   implements OnInit, AfterViewInit, AfterContentInit
 {
-  @ContentChild('nameContent', { static: true }) nameContent;
+  @ContentChild('nameContent', { static: true }) nameContent: any;
   constructor() {}
 
-  ngOnInit() {
-    console.log(
-      'OnInit: nameContent available only if static is true. ',
-      this.nameContent
-    );
-  }
-  ngAfterContentInit() {
-    console.log('AfterContentInit: nameContent available. ', this.nameContent);
-  }
-  ngAfterViewInit() {
-    console.log('AfterViewInit: nameContent available. ', this.nameContent);
-  }
-}
-```
-
-**`src\app\fruit-list\fruit-list.component.ts`**
-
-```ts
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  OnDestroy,
-} from '@angular/core';
-
-@Component({
-  selector: 'app-fruit-list',
-  template: `
-    <ul>
-      <li *ngFor="let fruit of fruits">
-        {{ fruit }}
-      </li>
-    </ul>
-  `,
-  styles: [],
-})
-export class FruitListComponent implements OnInit, OnChanges, OnDestroy {
-  @Input()
-  fruits: string[];
-  constructor() {
-    console.log('Constructor');
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('FruitList OnChanges');
-    console.log('Previous Values: ' + changes.fruits.previousValue);
-    console.log('Current Values: ' + changes.fruits.currentValue);
-  }
-  ngOnInit() {
-    console.log('FruitList OnInit');
-  }
-  ngOnDestroy(): void {
-    console.log('FruitList Destroyed');
-  }
++  ngOnInit() {
++    console.log(
++      'OnInit: nameContent available only if static is true. +',
++      this.nameContent
++    );
++  }
++  ngAfterContentInit() {
++    console.log('AfterContentInit: nameContent available. ', +this.nameContent);
++  }
++  ngAfterViewInit() {
++    console.log('AfterViewInit: nameContent available. ', +this.nameContent);
++  }
 }
 ```
 
 **`src\app\app.component.ts`**
 
-```ts
+```diff
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FruitListComponent } from './fruit-list/fruit-list.component';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
@@ -444,7 +404,7 @@ import { HelloWorldComponent } from './hello-world/hello-world.component';
   selector: 'app-root',
   template: `
     <app-hello-world>
-      <h2 #nameContent>Bond, James Bond</h2>
++      <h2 #nameContent>Bond, James Bond</h2>
     </app-hello-world>
   `,
   styles: [],
@@ -472,58 +432,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 <div style="page-break-after: always;"></div>
 
 <div style="page-break-after: always;"></div>
-
-## IVY
-
-Ivy is the code name for Angular's [next-generation compilation and rendering pipeline](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7). Starting with Angular version 8, you can choose to opt in to start using a preview version of Ivy and help in its continuing development and tuning.
-
-It is the default rendering engine in an Angular version 9 project.
-
-### Using Ivy in an existing project
-
-To update an existing project:
-
-1. Update to Angular version 11 using the directions here:
-   https://update.angular.io/
-   > Choose From 8.0 to 9.x
-   > Then choose from 9.x to 10.x
-   > Then choose from 10.x to 11.x
-   > Note: You cannot skip versions when upgrading
-
-OR
-
-2. Set the `enableIvy` option in the `angularCompilerOptions` in your project's `tsconfig.app.json`.
-
-```json
-{
-  "compilerOptions": { ... },
-  "angularCompilerOptions": {
-    "enableIvy": true
-  }
-}
-```
-
-AOT compilation with Ivy is faster and should be used by default. In the `angular.json` workspace configuration file, set the default build options for your project to always use AOT compilation.
-
-```json
-{
-  "projects": {
-    "my-existing-project": {
-      "architect": {
-        "build": {
-          "options": {
-            ...
-            "aot": true,
-          }
-        }
-      }
-    }
-  }
-}
-
-```
-
-To stop using the Ivy compiler, set `enableIvy` to `false` in `tsconfig.app.json`, or remove it completely. Also remove `"aot": true` from your default build options if you didn't have it there before.
 
 ## Resources
 
