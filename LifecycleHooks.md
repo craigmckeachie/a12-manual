@@ -8,7 +8,7 @@ Angular offers **lifecycle hooks** that provide visibility into these key life m
 
 ### Starting Point
 
-Open `demos\start\` directory.
+Open `demos\` directory.
 
 ```
 git checkout input-property -f
@@ -17,30 +17,34 @@ git clean -df
 
 ### Init & Changes
 
+```
+git checkout lifecycle-basics
+```
+
 **`src\app\app.component.ts`**
 
-```ts
+```diff
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   template: `
     <app-fruit-list [fruits]="data"></app-fruit-list>
-    <button (click)="onClickChange()">Change List</button>
++    <button (click)="onClickChange()">Change List</button>
   `,
   styles: [],
 })
 export class AppComponent {
   data: string[] = ['Apple', 'Orange', 'Plum'];
-  onClickChange() {
-    this.data = ['Banana', 'Kiwi', 'Grape'];
-  }
++  onClickChange() {
++    this.data = ['Banana', 'Kiwi', 'Grape'];
++  }
 }
 ```
 
 **`src\app\fruit-list\fruit-list.component.ts`**
 
-```ts
+```diff
 import {
   Component,
   OnInit,
@@ -60,21 +64,23 @@ import {
   `,
   styles: [],
 })
-export class FruitListComponent implements OnInit, OnChanges {
+export class FruitListComponent implements OnInit,
++ OnChanges
+{
   @Input()
   fruits: string[];
-  constructor() {
-    console.log('Constructor');
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('OnChanges');
-    console.log('Previous Values: ' + changes.fruits.previousValue);
-    console.log('Current Values: ' + changes.fruits.currentValue);
-  }
-
-  ngOnInit() {
-    console.log('OnInit');
-  }
++  constructor() {
++    console.log('Constructor');
++  }
++  ngOnChanges(changes: SimpleChanges): void {
++    console.log('OnChanges');
++    console.log('Previous Values: ' + changes.+fruits.previousValue);
++    console.log('Current Values: ' + changes.fruits.+currentValue);
++  }
++
++  ngOnInit() {
++    console.log('OnInit');
++  }
 }
 ```
 
@@ -180,79 +186,11 @@ Click Remove
 Destroyed
 ```
 
-### Final Code
-
-**`src\app\app.component.ts`**
-
-```ts
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  template: `
-    <app-fruit-list [fruits]="data" *ngIf="showList"></app-fruit-list>
-    <button (click)="onClickChange()">Change List</button>
-    <br />
-    <button (click)="onClickRemove()">Remove</button>
-  `,
-  styles: [],
-})
-export class AppComponent {
-  data: string[] = ['Apple', 'Orange', 'Plum'];
-  showList = true;
-  onClickChange() {
-    this.data = ['Banana', 'Kiwi', 'Grape'];
-  }
-  onClickRemove() {
-    this.showList = !this.showList;
-  }
-}
-```
-
-**`src\app\fruit-list\fruit-list.component.ts`**
-
-```ts
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  OnDestroy,
-} from '@angular/core';
-
-@Component({
-  selector: 'app-fruit-list',
-  template: `
-    <ul>
-      <li *ngFor="let fruit of fruits">
-        {{ fruit }}
-      </li>
-    </ul>
-  `,
-  styles: [],
-})
-export class FruitListComponent implements OnInit, OnChanges, OnDestroy {
-  @Input()
-  fruits: string[];
-  constructor() {
-    console.log('Constructor');
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('OnChanges');
-    console.log('Previous Values: ' + changes.fruits.previousValue);
-    console.log('Current Values: ' + changes.fruits.currentValue);
-  }
-  ngOnInit() {
-    console.log('OnInit');
-  }
-  ngOnDestroy(): void {
-    console.log('Destroyed');
-  }
-}
-```
-
 ### ViewChild(ren) & AfterViewInit
+
+```
+git checkout lifecycle-viewinit
+```
 
 ```
 ng g c hello-world
@@ -260,15 +198,15 @@ ng g c hello-world
 
 **`src\app\app.component.ts`**
 
-```ts
+```diff
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FruitListComponent } from './fruit-list/fruit-list.component';
-import { HelloWorldComponent } from './hello-world/hello-world.component';
++ import { HelloWorldComponent } from './hello-world/hello-world.component';
 
 @Component({
   selector: 'app-root',
   template: `
-    <app-hello-world></app-hello-world>
++    <app-hello-world></app-hello-world>
     <app-fruit-list [fruits]="data" *ngIf="showList"></app-fruit-list>
     <button (click)="onClickChange()">Change List</button>
     <br />
@@ -277,72 +215,29 @@ import { HelloWorldComponent } from './hello-world/hello-world.component';
   styles: [],
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  @ViewChild(HelloWorldComponent, { static: true })
-  helloWorldComponent!: HelloWorldComponent;
-  @ViewChild(FruitListComponent, { static: false })
++  @ViewChild(HelloWorldComponent, { static: true })
++  helloWorldComponent!: HelloWorldComponent;
++  @ViewChild(FruitListComponent, { static: false })
   data: string[] = ['Apple', 'Orange', 'Plum'];
   showList = true;
 
-  ngOnInit(): void {
-    console.log('App OnInit: ');
-    console.log('ViewChild (hello):', this.helloWorldComponent);
-    console.log('ViewChild: (fruit list)', this.fruitListComponent);
-  }
-
-  ngAfterViewInit(): void {
-    console.log('App AfterViewInit: ');
-    console.log('ViewChild (hello):', this.helloWorldComponent);
-    console.log('ViewChild: (fruit list)', this.fruitListComponent);
-  }
++  ngOnInit(): void {
++    console.log('App OnInit: ');
++    console.log('ViewChild (hello):', this.helloWorldComponent);
++    console.log('ViewChild: (fruit list)', this.fruitListComponent);
++  }
++
++  ngAfterViewInit(): void {
++    console.log('App AfterViewInit: ');
++    console.log('ViewChild (hello):', this.helloWorldComponent);
++    console.log('ViewChild: (fruit list)', this.fruitListComponent);
++  }
 
   onClickChange() {
     this.data = ['Banana', 'Kiwi', 'Grape'];
   }
   onClickRemove() {
     this.showList = !this.showList;
-  }
-}
-```
-
-**`src\app\fruit-list\fruit-list.component.ts`**
-
-```ts
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  OnDestroy,
-} from '@angular/core';
-
-@Component({
-  selector: 'app-fruit-list',
-  template: `
-    <ul>
-      <li *ngFor="let fruit of fruits">
-        {{ fruit }}
-      </li>
-    </ul>
-  `,
-  styles: [],
-})
-export class FruitListComponent implements OnInit, OnChanges, OnDestroy {
-  @Input()
-  fruits: string[];
-  constructor() {
-    console.log('Constructor');
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('FruitList OnChanges');
-    console.log('Previous Values: ' + changes.fruits.previousValue);
-    console.log('Current Values: ' + changes.fruits.currentValue);
-  }
-  ngOnInit() {
-    console.log('FruitList OnInit');
-  }
-  ngOnDestroy(): void {
-    console.log('FruitList Destroyed');
   }
 }
 ```
@@ -353,6 +248,10 @@ export class FruitListComponent implements OnInit, OnChanges, OnDestroy {
 
 - ViewChildren don’t include elements that exist within the ng-content tag.
 - ContentChildren includes only elements that exists within the ng-content tag.
+
+```
+git checkout lifecycle-contentinit
+```
 
 **`src\hello-world\hello-world.component.ts`**
 
@@ -428,67 +327,3 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 - [Lifecycle Hooks Documentation](https://angular.io/guide/lifecycle-hooks)
 - [Understanding View Children and ContentChildren](https://netbasal.com/understanding-viewchildren-contentchildren-and-querylist-in-angular-896b0c689f6e)
-
-<div style="page-break-after: always;"></div>
-
-<div style="page-break-after: always;"></div>
-
-## Resources
-
-- [A Plan for Version 8 & Ivy](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7)
-- [Ivy Official Documentation](https://angular.io/guide/ivy)
-
-- [Ivy Architecture](https://github.com/angular/angular/blob/master/packages/compiler/design/architecture.md)
-
-- [The New Ivy Compiler Finally Works on Windows](https://levelup.gitconnected.com/the-new-angular-ivy-compiler-finally-works-on-windows-9042378cede0)
-
-- [What is Angular Ivy](https://blog.ninja-squad.com/2019/05/07/what-is-angular-ivy/)
-
-- [Exploring the new Ivy Compiler (slightly outdated)](https://blog.angularindepth.com/inside-ivy-exploring-the-new-angular-compiler-ebf85141cee1)
-
-<div style="page-break-after: always;"></div>
-
-## Setup
-
-### Creating this project
-
-Not done in class just checkout start branch.
-
-```
-ng new demos --routing --inline-style --inline-template --skip-tests --skip-install
-```
-
-> Notice the flags --inline-style --inline-template so separate html and css files are not generated for each component.
-
-1. Open `package.json` and remove `devDependencies` related to testing.
-2. Delete e2e folder.
-3. npm install
-
-<div style="page-break-after: always;"></div>
-
-### Creating the http-start branch
-
-Not done in class just checkout http-start branch.
-
-```shell
-git checkout start
-npm install json-server
-mkdir api
-```
-
-Copy db.json from here: https://jsonplaceholder.typicode.com/db
-into the api folder.
-
-Add script to `package.json`
-
-```diff
-"scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-+   "api": "json-server ./api/db.json"
-  },
-```

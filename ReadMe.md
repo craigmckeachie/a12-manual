@@ -1,5 +1,6 @@
 # Advanced Angular
 
+- [Project Setup](./ProjectSetup.md)
 - RxJS
   - Slides
   - [Demos](./RxJS.md)
