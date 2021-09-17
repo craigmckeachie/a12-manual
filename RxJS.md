@@ -9,25 +9,25 @@
   - [Observers](#observers)
   - [Subcriptions](#subcriptions)
   - [Operators](#operators)
-      - [map](#map)
+    - [map](#map)
     - [filter](#filter)
     - [Fluent Syntax](#fluent-syntax)
     - [switchMap](#switchmap)
   - [Subjects](#subjects)
-      - [Unicast (Observables)](#unicast-observables)
-      - [Multicast (Subjects)](#multicast-subjects)
-      - [BehaviorSubject](#behaviorsubject)
+    - [Unicast (Observables)](#unicast-observables)
+    - [Multicast (Subjects)](#multicast-subjects)
+    - [BehaviorSubject](#behaviorsubject)
   - [Practical Example](#practical-example)
-      - [debounceTime](#debouncetime)
-      - [distinctUntilChanged](#distinctuntilchanged)
-      - [switchMap](#switchmap-1)
+    - [debounceTime](#debouncetime)
+    - [distinctUntilChanged](#distinctuntilchanged)
+    - [switchMap](#switchmap-1)
   - [Additional Reading](#additional-reading)
 
 ## Code Examples
 
 ```
 git checkout rxjs-observables-1
-git checkout branch rxjs-observables-2
+git checkout rxjs-observables-2
 git checkout rxjs-observables-3
 git checkout rxjs-observer
 git checkout rxjs-operators-map
