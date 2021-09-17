@@ -75,6 +75,35 @@
    ng generate @ngrx/schematics:store State --root --module app.module.ts
    ```
 
+1. Remove the duplicate `StoreModule` registration.
+
+   #### `app.module.ts`
+
+   ```diff
+   ...
+   @NgModule({
+     declarations: [AppComponent],
+     imports: [
+       BrowserModule,
+       AppRoutingModule,
+       ProjectsModule,
+       HttpClientModule,
+       HomeModule,
+   -    StoreModule.forRoot({}, {}),
+       StoreDevtoolsModule.instrument({
+         maxAge: 25,
+         logOnly: environment.production,
+       }),
+       EffectsModule.forRoot([AppEffects, ProjectEffects]),
+       StoreModule.forRoot(reducers, { metaReducers }),
+       !environment.production ? StoreDevtoolsModule.instrument() : [],
+     ],
+     providers: [],
+     bootstrap: [AppComponent],
+   })
+   export class AppModule {}
+   ```
+
 1. Generate the root effects and register it with the app.module.ts
    ```
    ng generate @ngrx/schematics:effect App --root --module app.module.ts
@@ -82,8 +111,6 @@
    - Should we wire up success and failure actions? No
    - Do you want to use the create function? Yes
 1. **Open** `src\app\app.module.ts` and notice that the `StoreModule` was automatically imported by the `ng add` commands and the Redux Dev Tools are configured.
-
-<div style="page-break-after: always;"></div>
 
 ### Actions
 
