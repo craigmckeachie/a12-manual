@@ -218,7 +218,7 @@
 
 1. Create the `ProjectEffects` class and the `load$` and `save$` effects using the `createEffect` helper function.
 
-   **`src\app\projects\shared\state\project.effects.ts`.**
+   **`src\app\projects\shared\state\project.effects.ts`**
 
    ```ts
    import { Injectable } from '@angular/core';
@@ -241,8 +241,8 @@
      load$ = createEffect(() => {
        return this.actions$.pipe(
          ofType(load),
-         switchMap(() => {
-           return this.projectService.list().pipe(
+         switchMap(({ name }) => {
+           return this.projectService.listByName(name).pipe(
              map((data) => loadSuccess({ projects: data })),
              catchError((error) => of(loadFail({ error: error })))
            );
@@ -557,3 +557,7 @@
   [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367)
 
   [Presentational vs Container components divide](https://twitter.com/dan_abramov/status/802569801906475008)
+
+```
+
+```
