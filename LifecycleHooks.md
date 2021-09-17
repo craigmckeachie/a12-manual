@@ -74,8 +74,8 @@ export class FruitListComponent implements OnInit,
 +  }
 +  ngOnChanges(changes: SimpleChanges): void {
 +    console.log('OnChanges');
-+    console.log('Previous Values: ' + changes.+fruits.previousValue);
-+    console.log('Current Values: ' + changes.fruits.+currentValue);
++    console.log('Previous Values: ' + changes.fruits.previousValue);
++    console.log('Current Values: ' + changes.fruits.currentValue);
 +  }
 +
 +  ngOnInit() {
