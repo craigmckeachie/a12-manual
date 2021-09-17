@@ -7,23 +7,66 @@ https://ngrx.io/
 
 #### Setup
 
-1. Open: `demos\start`
-1. Run `npm install` if you haven't earlier in the class.
+1. Open: `demos`
+2. Checkout the `main` branch.
+
+   ```
+   git checkout main -f
+   ```
+
+3. Run `npm install` if you haven't earlier in the class.
 
 #### Installation
 
-1. Install @ngrx/schematics from npm:
+1. To keep this example as simple as possible set TypeScript `strict` to `false`.
+
+#### `tsconfig.json`
+
+```diff
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+-    "strict": true,
++    "strict": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2017",
+    "module": "es2020",
+    "lib": ["es2018", "dom"]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
+```
+
+> Note that this does not turn off all type checking, but instead just turns down the strictness.
+
+2. Install @ngrx/schematics from npm:
 
    ```
    ng add @ngrx/schematics
    ```
 
-1. This will ask you if you want to make the @ngrx/schematics the default collection in your Angular CLI project. Choose `n` for no in this demo.
+3. This will ask you if you want to make the @ngrx/schematics the default collection in your Angular CLI project. Choose `n` for no in this demo.
 
    > NgRx Schematics helps you avoid writing common boilerplate and instead focus on building your application
    > The @ngrx/schematics command prefix is only needed when the default collection isn't set. For example, the command `ng g @ngrx/schematics:action Counter` could just be `ng g action Counter`
 
-1. After installing @ngrx/schematics, install the NgRx dependencies.
+4. After installing @ngrx/schematics, install the NgRx dependencies.
 
    ```
    ng add @ngrx/store
@@ -34,15 +77,15 @@ https://ngrx.io/
 
    ```
    # DO NOT RUN THESE COMMANDS
-   npm add @ngrx/effects
-   npm add @ngrx/entity
+   ng add @ngrx/effects
+   ng add @ngrx/entity
    ```
 
 <div style="page-break-after: always;"></div>
 
 #### Store
 
-Generate the initial state management and register it within the app.module.ts
+1. Generate the initial state management and register it within the app.module.ts
 
 ```
 ng generate @ngrx/schematics:store State --root --module app.module.ts
@@ -51,6 +94,28 @@ ng generate @ngrx/schematics:store State --root --module app.module.ts
 > If this command doesn't work try adding `ng add @ngrx/schematics` again.
 
 > By adding the StoreModule.forRoot function in the imports array of your AppModule. The StoreModule.forRoot() method registers the global providers needed to access the Store throughout your application.
+
+2. Check to see if the StoreModule has been imported twice (once by the ng add command and once by the ng generate store command ). Remove the import with the empty arguments shown below.
+
+```diff
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+-    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    CounterModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
 #### Actions
 

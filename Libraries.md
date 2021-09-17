@@ -191,17 +191,19 @@
 
     #### `src\app\app.module.ts`
 
-    ```
+    ```diff
     import { NgModule } from '@angular/core';
     import { BrowserModule } from '@angular/platform-browser';
-    import { MyLibModule } from 'funny-ant-my-lib';
+    + import { MyLibModule } from 'funny-ant-my-lib';
 
     import { AppRoutingModule } from './app-routing.module';
     import { AppComponent } from './app.component';
 
     @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule, MyLibModule],
+    imports: [BrowserModule, AppRoutingModule, 
+    + MyLibModule
+    ],
     providers: [],
     bootstrap: [AppComponent],
     })
