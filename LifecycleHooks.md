@@ -218,6 +218,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 +  @ViewChild(HelloWorldComponent, { static: true })
 +  helloWorldComponent!: HelloWorldComponent;
 +  @ViewChild(FruitListComponent, { static: false })
++  fruitListComponent!: FruitListComponent;
+
   data: string[] = ['Apple', 'Orange', 'Plum'];
   showList = true;
 
